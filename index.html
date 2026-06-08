@@ -178,11 +178,12 @@
     btnText.textContent = 'Invio in corso...';
 
     const payload = {
-      nome,
-      email,
-      telefono,
-      messaggio: tipo ? '[' + tipo + '] ' + messaggio : messaggio
-    };
+  nome,
+  email,
+  telefono,
+  tipo,
+  messaggio
+};
 
     try {
       const res = await fetch(WEBHOOK_URL, {
