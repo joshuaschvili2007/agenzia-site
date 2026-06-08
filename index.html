@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenzia — Contattaci</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f8f6f1;
+    --accent: #c8a96e;
+    --muted: #6b6b7b;
+    --border: rgba(26,26,46,0.12);
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(248,246,241,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-link {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .nav-link:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 48px 80px;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-left { animation: fadeUp 0.8s ease both; }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 0.5px solid var(--accent);
+    padding: 5px 12px;
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--ink);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* FORM CARD */
+  .form-card {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    padding: 40px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .form-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .form-card-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 7px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--paper);
+    border: 0.5px solid var(--border);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--accent);
+    background: var(--white);
+  }
+
+  .field textarea { resize: vertical; min-height: 90px; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover { background: var(--accent); }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { opacity: 0.5; cursor: default; }
+
+  /* SPINNER */
+  .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+
+  /* SUCCESS */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .success-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #eaf5ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 24px;
+  }
+
+  .success-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .success-sub {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .reset-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: underline;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* SERVICES */
+  .services {
+    background: var(--ink);
+    color: var(--white);
+    padding: 80px 48px;
+  }
+
+  .services-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .services-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    margin-bottom: 56px;
+    max-width: 480px;
+    line-height: 1.2;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .service-item {
+    background: var(--ink);
+    padding: 32px;
+    transition: background 0.2s;
+  }
+
+  .service-item:hover { background: rgba(255,255,255,0.04); }
+
+  .service-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .service-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .service-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { grid-template-columns: 1fr; padding: 100px 20px 60px; gap: 48px; }
+    .hero-desc { max-width: 100%; }
+    .services { padding: 60px 20px; }
+    .services-grid { grid-template-columns: 1fr; }
+    footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
+    .field-row { grid-template-columns: 1fr; }
+    .form-card { padding: 28px 20px; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Agenzia<span>.</span></a>
+  <a class="nav-link" href="#contatto">Contattaci</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Siamo qui per te</div>
+    <h1 class="hero-title">
+      Trova la soluzione<br>
+      <em>giusta per te</em>
+    </h1>
+    <p class="hero-desc">
+      Compila il form e ti ricontattiamo entro 2 ore lavorative. 
+      Il nostro team analizzerà la tua richiesta e ti proporrà 
+      le migliori opzioni disponibili.
+    </p>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">+500</span>
+        <span class="stat-label">Clienti soddisfatti</span>
+      </div>
+      <div>
+        <span class="stat-num">2h</span>
+        <span class="stat-label">Tempo di risposta</span>
+      </div>
+      <div>
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Anni di esperienza</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-card" id="contatto">
+    <div id="form-content">
+      <div class="form-card-title">Richiedi informazioni</div>
+      <div class="form-card-sub">Risposta garantita entro 2 ore lavorative</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Nome e cognome *</label>
+          <input type="text" id="f-nome" placeholder="Mario Rossi" required>
+        </div>
+        <div class="field">
+          <label>Telefono</label>
+          <input type="tel" id="f-tel" placeholder="+39 333 1234567">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email *</label>
+        <input type="email" id="f-email" placeholder="mario@email.com" required>
+      </div>
+
+      <div class="field">
+        <label>Servizio richiesto</label>
+        <select id="f-tipo">
+          <option value="">Seleziona...</option>
+          <option value="Consulenza">Consulenza</option>
+          <option value="Acquisto">Acquisto</option>
+          <option value="Vendita">Vendita</option>
+          <option value="Affitto">Affitto</option>
+          <option value="Altro">Altro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Descrivi la tua richiesta *</label>
+        <textarea id="f-msg" placeholder="Raccontaci cosa stai cercando, il tuo budget, le tue preferenze..."></textarea>
+      </div>
+
+      <div id="error-msg" style="font-size:13px;color:#c0392b;margin-bottom:12px;display:none;"></div>
+
+      <button class="submit-btn" id="submit-btn" onclick="inviaLead()">
+        <span id="btn-text">Invia richiesta</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </div>
+
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Richiesta inviata!</div>
+      <div class="success-sub">
+        Grazie per averci contattato.<br>
+        Ti risponderemo entro 2 ore lavorative.
+      </div>
+      <span class="reset-link" onclick="resetForm()">Invia un'altra richiesta</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="services-inner">
+    <div class="services-label">I nostri servizi</div>
+    <h2 class="services-title">Cosa possiamo fare per te</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-num">01</div>
+        <div class="service-name">Consulenza personalizzata</div>
+        <div class="service-desc">Analizziamo le tue esigenze e ti guidiamo verso la soluzione più adatta.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">02</div>
+        <div class="service-name">Risposta rapida</div>
+        <div class="service-desc">Garantiamo un ricontatto entro 2 ore lavorative dalla tua richiesta.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">03</div>
+        <div class="service-name">Supporto completo</div>
+        <div class="service-desc">Ti accompagniamo in ogni fase, dalla prima chiamata alla conclusione.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Agenzia<span>.</span></div>
+  <div class="footer-copy">© 2026 — Tutti i diritti riservati</div>
+</footer>
+
+<script>
+  // ⬇️ CAMBIA QUESTO CON IL TUO URL WEBHOOK N8N
+  const WEBHOOK_URL = 'https://skibilambo.app.n8n.cloud/webhook/lead-agenzia';
+
+  async function inviaLead() {
+    const nome = document.getElementById('f-nome').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const telefono = document.getElementById('f-tel').value.trim();
+    const tipo = document.getElementById('f-tipo').value;
+    const messaggio = document.getElementById('f-msg').value.trim();
+    const errDiv = document.getElementById('error-msg');
+
+    errDiv.style.display = 'none';
+
+    if (!nome || !email || !messaggio) {
+      errDiv.textContent = 'Compila i campi obbligatori: nome, email e messaggio.';
+      errDiv.style.display = 'block';
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    const spinner = document.getElementById('spinner');
+    const btnText = document.getElementById('btn-text');
+
+    btn.disabled = true;
+    spinner.style.display = 'block';
+    btnText.textContent = 'Invio in corso...';
+
+    const payload = {
+      nome,
+      email,
+      telefono,
+      messaggio: tipo ? '[' + tipo + '] ' + messaggio : messaggio
+    };
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      document.getElementById('form-content').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+    } catch(e) {
+      errDiv.textContent = 'Errore di connessione. Riprova tra qualche secondo.';
+      errDiv.style.display = 'block';
+      btn.disabled = false;
+      spinner.style.display = 'none';
+      btnText.textContent = 'Invia richiesta';
+    }
+  }
+
+  function resetForm() {
+    document.getElementById('form-content').style.display = 'block';
+    document.getElementById('success-screen').style.display = 'none';
+    document.getElementById('submit-btn').disabled = false;
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('btn-text').textContent = 'Invia richiesta';
+    ['f-nome','f-email','f-tel','f-msg'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-tipo').value = '';
+  }
+</script>
+
+</body>
+</html>
