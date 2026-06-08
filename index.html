@@ -535,11 +535,12 @@
     };
 
     try {
-      await fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+     await fetch(WEBHOOK_URL, {
+  method: 'POST',
+  headers: { 'Content-Type': 'text/plain' },
+  body: JSON.stringify(payload),
+  mode: 'no-cors'
+});
       document.getElementById('form-content').style.display = 'none';
       document.getElementById('success-screen').style.display = 'block';
     } catch(e) {
